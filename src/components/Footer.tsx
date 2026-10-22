@@ -1,7 +1,5 @@
 import { GraduationCap, MessageCircle } from 'lucide-react';
-import type { PageId } from '@/data/mockData';
-
-const WHATSAPP_NUMBER = '9035324065';
+import { WHATSAPP_LINK, WHATSAPP_NUMBER, type PageId } from '@/data/mockData';
 
 interface FooterProps {
   onNavigate: (page: PageId) => void;
@@ -19,7 +17,7 @@ export default function Footer({ onNavigate }: FooterProps) {
   return (
     <footer className="bg-slate-50 border-t border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-12 pb-8">
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1.2fr]">
           {/* Brand */}
           <div>
             <button onClick={() => onNavigate('home')} className="flex items-center gap-2.5">
@@ -42,17 +40,7 @@ export default function Footer({ onNavigate }: FooterProps) {
               <li><button onClick={() => goToSection('ai-course')} className={linkClass}>AI tools course</button></li>
               <li><button onClick={() => goToSection('computer-course')} className={linkClass}>Basic computer classes</button></li>
               <li><button onClick={() => goToSection('computer-course')} className={linkClass}>Excel, Word and PowerPoint</button></li>
-            </ul>
-          </div>
-
-          {/* Student area */}
-          <div>
-            <h3 className="font-semibold text-slate-900">Student area</h3>
-            <ul className="mt-4 space-y-3">
-              <li><button onClick={() => onNavigate('live-classes')} className={linkClass}>Live classes</button></li>
-              <li><button onClick={() => onNavigate('recordings')} className={linkClass}>Recordings</button></li>
-              <li><button onClick={() => onNavigate('assignments')} className={linkClass}>Assignments</button></li>
-              <li><button onClick={() => onNavigate('affiliate')} className={linkClass}>Affiliate hub</button></li>
+              <li><button onClick={() => onNavigate('payment')} className={linkClass}>Payment</button></li>
             </ul>
           </div>
 
@@ -63,7 +51,7 @@ export default function Footer({ onNavigate }: FooterProps) {
               Questions about classes or enrollment? Message us on WhatsApp.
             </p>
             <a
-              href={`https://wa.me/91${WHATSAPP_NUMBER}`}
+              href={WHATSAPP_LINK}
               target="_blank"
               rel="noopener noreferrer"
               className="mt-4 inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white border border-slate-200 text-sm font-medium text-slate-800 hover:border-emerald-300 transition-colors"

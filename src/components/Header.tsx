@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Menu, X, GraduationCap, ArrowRight } from 'lucide-react';
-import { NAV_ITEMS, PAYMENT_URL, type NavItem, type PageId } from '@/data/mockData';
+import { NAV_ITEMS, type NavItem, type PageId } from '@/data/mockData';
 
 interface HeaderProps {
   activePage: PageId;
@@ -29,15 +29,7 @@ export default function Header({ activePage, onNavigate }: HeaderProps) {
         {item.label}
       </>
     );
-    // External link (Payments) — takes the visitor to the payment site
-    if (item.href) {
-      return (
-        <a key={item.id} href={item.href} className={itemClass(false, mobile)}>
-          {content}
-        </a>
-      );
-    }
-    const id = item.id as PageId;
+    const id = item.id;
     return (
       <button key={item.id} onClick={() => handleNav(id)} className={itemClass(activePage === id, mobile)}>
         {content}
@@ -67,7 +59,8 @@ export default function Header({ activePage, onNavigate }: HeaderProps) {
           {/* CTA */}
           <div className="hidden lg:flex items-center gap-2 shrink-0">
             <a
-              href={PAYMENT_URL}
+              href="#payment"
+              onClick={() => setMobileOpen(false)}
               className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-500 transition-colors"
             >
               Enroll Now
@@ -92,7 +85,8 @@ export default function Header({ activePage, onNavigate }: HeaderProps) {
           <nav className="max-w-7xl mx-auto px-4 py-4 flex flex-col gap-1">
             {NAV_ITEMS.map((item) => renderItem(item, true))}
             <a
-              href={PAYMENT_URL}
+              href="#payment"
+              onClick={() => setMobileOpen(false)}
               className="mt-2 flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-lg bg-indigo-600 text-white text-sm font-medium"
             >
               Enroll Now

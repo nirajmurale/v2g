@@ -25,7 +25,6 @@ import {
   Home,
   Briefcase,
 } from 'lucide-react';
-import { PAYMENT_URL } from '@/data/mockData';
 
 /* ---------------- Content ---------------- */
 
@@ -120,11 +119,11 @@ const FAQS = [
   },
   {
     q: 'What if I miss a live class?',
-    a: 'Every class is recorded and added to the Recordings section, so you can watch it whenever you want.',
+    a: 'Every class is recorded and shared with you, so you can watch it whenever you want.',
   },
   {
     q: 'How do I enroll?',
-    a: 'Click Enroll Now to go to our secure payment page. After payment you get access to live classes, recordings and assignments.',
+    a: 'Click Enroll Now and pay by scanning our QR code or by bank transfer (NEFT/IMPS). Then send the payment screenshot to us on WhatsApp and we’ll confirm your seat.',
   },
 ];
 
@@ -142,7 +141,7 @@ function SectionHeading({ title, body }: { title: string; body?: string }) {
 function EnrollButton({ label = 'Enroll now' }: { label?: string }) {
   return (
     <a
-      href={PAYMENT_URL}
+      href="#payment"
       className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-indigo-600 text-white font-semibold hover:bg-indigo-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transition-colors"
     >
       {label}
