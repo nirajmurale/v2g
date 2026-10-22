@@ -24,13 +24,8 @@ import {
   GraduationCap,
   Home,
   Briefcase,
-  Users,
 } from 'lucide-react';
-import { PAYMENT_URL, type PageId } from '@/data/mockData';
-
-interface HomePageProps {
-  onNavigate: (page: PageId) => void;
-}
+import { PAYMENT_URL } from '@/data/mockData';
 
 /* ---------------- Content ---------------- */
 
@@ -44,6 +39,13 @@ const AI_TOOLS = [
   { name: 'CapCut', use: 'Reels and Shorts with auto-captions and AI edits', icon: Clapperboard },
   { name: 'Gamma', use: 'Full presentations generated from a single outline', icon: Presentation },
   { name: 'Notion AI', use: 'Planning, notes and organising client work', icon: NotebookPen },
+];
+
+const HERO_TILES = [
+  { name: 'AI tools', note: 'ChatGPT, Gemini, Canva AI', icon: Bot, tone: 'bg-indigo-100 text-indigo-700' },
+  { name: 'Excel', note: 'Formulas, charts, sheets', icon: Table2, tone: 'bg-emerald-100 text-emerald-700' },
+  { name: 'PowerPoint', note: 'Slides that look sharp', icon: MonitorPlay, tone: 'bg-amber-100 text-amber-700' },
+  { name: 'Word', note: 'Letters and resumes', icon: FileText, tone: 'bg-sky-100 text-sky-700' },
 ];
 
 const ROADMAP = [
@@ -97,10 +99,10 @@ const COMPUTER_MODULES = [
 ];
 
 const AUDIENCE = [
-  { title: 'Students', body: 'Earn pocket money while studying and build skills colleges and employers look for.', icon: GraduationCap },
-  { title: 'Job seekers', body: 'Add Excel, PowerPoint and AI tools to your resume and stand out in interviews.', icon: Briefcase },
-  { title: 'Homemakers', body: 'Work from home on your own schedule with flexible freelance projects.', icon: Home },
-  { title: 'Small business owners', body: 'Make your own posts, bills and records instead of paying someone else.', icon: Store },
+  { title: 'Students', body: 'Earn pocket money while studying and build skills colleges and employers look for.', icon: GraduationCap, tone: 'bg-indigo-50 border-indigo-100', chip: 'bg-indigo-600 text-white' },
+  { title: 'Job seekers', body: 'Add Excel, PowerPoint and AI tools to your resume and stand out in interviews.', icon: Briefcase, tone: 'bg-sky-50 border-sky-100', chip: 'bg-sky-600 text-white' },
+  { title: 'Homemakers', body: 'Work from home on your own schedule with flexible freelance projects.', icon: Home, tone: 'bg-amber-50 border-amber-100', chip: 'bg-amber-500 text-white' },
+  { title: 'Small business owners', body: 'Make your own posts, bills and records instead of paying someone else.', icon: Store, tone: 'bg-emerald-50 border-emerald-100', chip: 'bg-emerald-600 text-white' },
 ];
 
 const FAQS = [
@@ -168,12 +170,16 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 
 /* ---------------- Page ---------------- */
 
-export default function HomePage({ onNavigate }: HomePageProps) {
+export default function HomePage() {
   return (
-    <div className="pb-8">
+    <div className="pb-4">
       {/* Hero */}
-      <section className="pt-10 pb-20 sm:pt-16">
-        <div className="max-w-3xl">
+      <section className="relative overflow-hidden mt-2 mb-12 rounded-[2rem] bg-gradient-to-br from-indigo-50 via-white to-violet-50 border border-indigo-100 px-6 py-10 sm:px-12 sm:py-14 grid lg:grid-cols-[1.2fr_0.8fr] gap-12 items-center">
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 opacity-60 [background-image:radial-gradient(#c7d2fe_1px,transparent_1px)] [background-size:22px_22px] [mask-image:linear-gradient(to_right,transparent,black_60%)]"
+        />
+        <div className="relative max-w-3xl">
           <h1 className="font-display text-[2.6rem] leading-[1.05] sm:text-6xl font-extrabold tracking-tight text-slate-900">
             Learn AI tools.
           </h1>
@@ -200,13 +206,28 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           </ul>
         </div>
 
+        {/* What you'll learn — course tiles */}
+        <div aria-hidden="true" className="relative hidden lg:grid grid-cols-2 gap-4">
+          {HERO_TILES.map((t, i) => (
+            <div
+              key={t.name}
+              className={`rounded-2xl bg-white border border-slate-200 p-5 shadow-sm ${i % 2 === 1 ? 'translate-y-6' : ''}`}
+            >
+              <span className={`w-11 h-11 rounded-xl flex items-center justify-center ${t.tone}`}>
+                <t.icon className="w-5 h-5" />
+              </span>
+              <p className="mt-4 font-semibold text-slate-900">{t.name}</p>
+              <p className="text-sm text-slate-500">{t.note}</p>
+            </div>
+          ))}
+        </div>
       </section>
 
       {/* Two tracks */}
-      <section className="grid md:grid-cols-2 gap-5 pb-24">
-        <a href="#ai-course" className="group rounded-3xl border border-slate-200 p-7 hover:border-indigo-300 transition-colors">
-          <Bot className="w-8 h-8 text-indigo-600" />
-          <h2 className="mt-5 font-display text-2xl font-bold text-slate-900">AI Tools & Online Earning</h2>
+      <section className="grid md:grid-cols-2 gap-4 mb-14">
+        <a href="#ai-course" className="group rounded-3xl bg-indigo-50 border border-indigo-100 p-6 sm:p-7 hover:border-indigo-300 transition-colors">
+          <span className="w-12 h-12 rounded-2xl bg-indigo-600 text-white flex items-center justify-center"><Bot className="w-6 h-6" /></span>
+          <h2 className="mt-4 font-display text-2xl font-bold text-slate-900">AI Tools & Online Earning</h2>
           <p className="mt-2 text-slate-600 leading-relaxed">
             Use AI to write, design, edit videos and build an income through freelancing, content and digital products.
           </p>
@@ -214,9 +235,9 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             View the AI course <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
           </span>
         </a>
-        <a href="#computer-course" className="group rounded-3xl border border-slate-200 p-7 hover:border-emerald-300 transition-colors">
-          <Laptop className="w-8 h-8 text-emerald-600" />
-          <h2 className="mt-5 font-display text-2xl font-bold text-slate-900">Basic Computer Classes</h2>
+        <a href="#computer-course" className="group rounded-3xl bg-emerald-50 border border-emerald-100 p-6 sm:p-7 hover:border-emerald-300 transition-colors">
+          <span className="w-12 h-12 rounded-2xl bg-emerald-600 text-white flex items-center justify-center"><Laptop className="w-6 h-6" /></span>
+          <h2 className="mt-4 font-display text-2xl font-bold text-slate-900">Basic Computer Classes</h2>
           <p className="mt-2 text-slate-600 leading-relaxed">
             Excel, Word, PowerPoint, typing, email and online safety, taught step by step from zero.
           </p>
@@ -227,15 +248,17 @@ export default function HomePage({ onNavigate }: HomePageProps) {
       </section>
 
       {/* AI tools */}
-      <section id="ai-course" className="scroll-mt-24 pb-24">
+      <section id="ai-course" className="scroll-mt-24 mb-14 rounded-[2rem] bg-slate-50 border border-slate-200 px-6 py-10 sm:px-12 sm:py-12">
         <SectionHeading
           title="The AI tools you’ll master"
           body="You won’t just watch demos. In every class you open the tool and make something real with it."
         />
-        <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 border-t border-l border-slate-200">
+        <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {AI_TOOLS.map((tool) => (
-            <div key={tool.name} className="flex gap-4 p-6 border-b border-r border-slate-200">
-              <tool.icon className="w-6 h-6 text-indigo-600 shrink-0 mt-0.5" />
+            <div key={tool.name} className="flex gap-4 p-5 rounded-2xl bg-white border border-slate-200">
+              <span className="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0">
+                <tool.icon className="w-5 h-5" />
+              </span>
               <div>
                 <h3 className="font-semibold text-slate-900">{tool.name}</h3>
                 <p className="mt-1 text-sm text-slate-600 leading-relaxed">{tool.use}</p>
@@ -246,13 +269,18 @@ export default function HomePage({ onNavigate }: HomePageProps) {
       </section>
 
       {/* Roadmap */}
-      <section className="pb-24">
-        <SectionHeading title="From first class to first client" body="The AI course follows four stages." />
-        <ol className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      <section className="mb-14 rounded-[2rem] bg-indigo-600 px-6 py-10 sm:px-12 sm:py-12">
+        <div className="max-w-2xl">
+          <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-white">From first class to first client</h2>
+          <p className="mt-3 text-lg text-indigo-100 leading-relaxed">The AI course follows four stages.</p>
+        </div>
+        <ol className="mt-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {ROADMAP.map((step, i) => (
-            <li key={step.title} className="relative">
-              <span className="font-display text-5xl font-extrabold text-indigo-200">{i + 1}</span>
-              <h3 className="mt-2 font-display text-lg font-bold text-slate-900">{step.title}</h3>
+            <li key={step.title} className="rounded-2xl bg-white p-6">
+              <span className="w-10 h-10 rounded-full bg-indigo-600 text-white font-display font-bold flex items-center justify-center">
+                {i + 1}
+              </span>
+              <h3 className="mt-5 font-display text-lg font-bold text-slate-900">{step.title}</h3>
               <p className="mt-2 text-slate-600 leading-relaxed">{step.body}</p>
             </li>
           ))}
@@ -260,8 +288,8 @@ export default function HomePage({ onNavigate }: HomePageProps) {
       </section>
 
       {/* Computer classes */}
-      <section id="computer-course" className="scroll-mt-24 pb-24">
-        <div className="grid lg:grid-cols-[0.8fr_1.2fr] gap-12">
+      <section id="computer-course" className="scroll-mt-24 mb-14 rounded-[2rem] bg-emerald-50 border border-emerald-100 px-6 py-10 sm:px-12 sm:py-12">
+        <div className="grid lg:grid-cols-[0.8fr_1.2fr] gap-10">
           <div className="lg:sticky lg:top-28 self-start">
             <SectionHeading
               title="Basic computer classes"
@@ -271,11 +299,11 @@ export default function HomePage({ onNavigate }: HomePageProps) {
               <EnrollButton label="Join the computer course" />
             </div>
           </div>
-          <div className="grid sm:grid-cols-2 gap-x-8 gap-y-10">
+          <div className="grid sm:grid-cols-2 gap-4">
             {COMPUTER_MODULES.map((mod) => (
-              <div key={mod.name}>
+              <div key={mod.name} className="rounded-2xl bg-white border border-emerald-100 p-5">
                 <div className="flex items-center gap-3">
-                  <span className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center">
+                  <span className="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center">
                     <mod.icon className="w-5 h-5" />
                   </span>
                   <h3 className="font-semibold text-slate-900">{mod.name}</h3>
@@ -295,12 +323,14 @@ export default function HomePage({ onNavigate }: HomePageProps) {
       </section>
 
       {/* Who it's for */}
-      <section className="pb-24">
+      <section className="mb-14">
         <SectionHeading title="Who these classes are for" />
-        <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {AUDIENCE.map((a) => (
-            <div key={a.title} className="rounded-3xl border border-slate-200 p-6">
-              <a.icon className="w-6 h-6 text-indigo-600" />
+            <div key={a.title} className={`rounded-3xl border p-6 ${a.tone}`}>
+              <span className={`w-11 h-11 rounded-xl flex items-center justify-center ${a.chip}`}>
+                <a.icon className="w-5 h-5" />
+              </span>
               <h3 className="mt-4 font-display text-lg font-bold text-slate-900">{a.title}</h3>
               <p className="mt-2 text-sm text-slate-600 leading-relaxed">{a.body}</p>
             </div>
@@ -308,34 +338,11 @@ export default function HomePage({ onNavigate }: HomePageProps) {
         </div>
       </section>
 
-      {/* What's included */}
-      <section className="pb-24">
-        <div className="rounded-3xl border border-slate-200 p-7 sm:p-10 grid md:grid-cols-[1fr_auto] gap-8 items-center">
-          <div>
-            <h2 className="font-display text-2xl sm:text-3xl font-bold text-slate-900">Everything you need is in your student area</h2>
-            <p className="mt-2 text-slate-600">Join classes, rewatch lessons and submit your work, all in one place.</p>
-          </div>
-          <div className="flex flex-wrap gap-3">
-            {[
-              { label: 'Live classes', page: 'live-classes' as PageId },
-              { label: 'Recordings', page: 'recordings' as PageId },
-              { label: 'Assignments', page: 'assignments' as PageId },
-            ].map((l) => (
-              <button
-                key={l.label}
-                onClick={() => onNavigate(l.page)}
-                className="px-4 py-2.5 rounded-xl bg-slate-100 text-slate-800 text-sm font-medium hover:bg-slate-200 transition-colors"
-              >
-                {l.label}
-              </button>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* FAQ */}
-      <section className="pb-24 max-w-3xl">
-        <SectionHeading title="Questions students ask" />
+      <section className="mb-16 max-w-3xl mx-auto">
+        <h2 className="text-center font-display text-3xl sm:text-4xl font-bold tracking-tight text-slate-900">
+          Questions students ask
+        </h2>
         <div className="mt-8 border-t border-slate-200">
           {FAQS.map((f) => (
             <FaqItem key={f.q} q={f.q} a={f.a} />
@@ -343,25 +350,6 @@ export default function HomePage({ onNavigate }: HomePageProps) {
         </div>
       </section>
 
-      {/* Final CTA */}
-      <section className="mb-16 rounded-3xl bg-slate-900 px-7 py-14 sm:px-12 sm:py-16 text-center">
-        <Users className="w-8 h-8 mx-auto text-amber-300" />
-        <h2 className="mt-5 font-display text-3xl sm:text-4xl font-bold text-white tracking-tight">
-          Start learning skills that pay.
-        </h2>
-        <p className="mt-3 text-slate-300 max-w-xl mx-auto">
-          Enroll today and get access to live classes, recordings and mentor-reviewed assignments.
-        </p>
-        <div className="mt-8">
-          <a
-            href={PAYMENT_URL}
-            className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-amber-300 text-slate-900 font-semibold hover:bg-amber-200 transition-colors"
-          >
-            Enroll now
-            <ArrowRight className="w-4 h-4" />
-          </a>
-        </div>
-      </section>
     </div>
   );
 }
