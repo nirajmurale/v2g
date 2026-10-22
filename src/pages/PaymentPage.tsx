@@ -9,6 +9,7 @@ import {
   MessageCircle,
   ShieldCheck,
   Camera,
+  FileSignature,
 } from 'lucide-react';
 import {
   BANK_DETAILS,
@@ -19,7 +20,7 @@ import {
   WHATSAPP_NUMBER,
 } from '@/data/mockData';
 
-type Method = 'qr' | 'bank';
+type Method = 'qr' | 'bank' | 'cheque';
 
 const WHATSAPP_MESSAGE = encodeURIComponent(
   'Hello v2gaiacademy, I have completed my payment. Sharing the screenshot here.\n\nName:\nCourse:'
@@ -74,8 +75,9 @@ export default function PaymentPage() {
   const [method, setMethod] = useState<Method>('qr');
 
   const tabs: { id: Method; label: string; sub: string; icon: typeof QrCode }[] = [
-    { id: 'qr', label: 'Scan QR code', sub: 'PhonePe, GPay, Paytm or any UPI app', icon: QrCode },
+    { id: 'qr', label: 'Scan QR code', sub: 'GPay, PhonePe or any UPI app', icon: QrCode },
     { id: 'bank', label: 'Bank transfer', sub: 'NEFT or IMPS from your bank', icon: Landmark },
+    { id: 'cheque', label: 'Cheque', sub: 'Deposit at your bank branch', icon: FileSignature },
   ];
 
   return (
@@ -86,13 +88,13 @@ export default function PaymentPage() {
           Pay your course fee
         </h1>
         <p className="mt-4 text-lg text-slate-600">
-          Choose how you’d like to pay. After paying, send us the screenshot on WhatsApp to confirm your seat.
+          Pay by UPI, bank transfer or cheque. After paying, send us the screenshot on WhatsApp to confirm your seat.
         </p>
       </section>
 
       <div className="max-w-3xl mx-auto">
         {/* Method picker */}
-        <div role="tablist" aria-label="Payment method" className="grid grid-cols-2 gap-3">
+        <div role="tablist" aria-label="Payment method" className="grid grid-cols-3 gap-2 sm:gap-3">
           {tabs.map((t) => {
             const active = method === t.id;
             return (
@@ -101,7 +103,7 @@ export default function PaymentPage() {
                 role="tab"
                 aria-selected={active}
                 onClick={() => setMethod(t.id)}
-                className={`flex items-center gap-3 sm:gap-4 text-left rounded-2xl border-2 p-4 sm:p-5 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ${
+                className={`flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-center sm:text-left rounded-2xl border-2 p-3 sm:p-5 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ${
                   active ? 'border-indigo-600 bg-indigo-50' : 'border-slate-200 bg-white hover:border-slate-300'
                 }`}
               >
@@ -113,7 +115,7 @@ export default function PaymentPage() {
                   <t.icon className="w-5 h-5" />
                 </span>
                 <span>
-                  <span className="block font-semibold text-slate-900">{t.label}</span>
+                  <span className="block font-semibold text-slate-900 text-sm sm:text-base">{t.label}</span>
                   <span className="hidden sm:block text-sm text-slate-500">{t.sub}</span>
                 </span>
               </button>
@@ -123,7 +125,7 @@ export default function PaymentPage() {
 
         {/* Panel */}
         <div className="mt-5 rounded-[2rem] border border-slate-200 bg-slate-50 p-5 sm:p-8">
-          {method === 'qr' ? (
+          {method === 'qr' && (
             <div className="grid sm:grid-cols-[auto_1fr] gap-8 items-center">
               <div className="mx-auto w-full max-w-[280px]">
                 <div className="rounded-3xl bg-white border border-slate-200 p-4 shadow-sm">
@@ -177,7 +179,9 @@ export default function PaymentPage() {
                 </a>
               </div>
             </div>
-          ) : (
+          )}
+
+          {method === 'bank' && (
             <div>
               <h2 className="font-display text-2xl font-bold text-slate-900">Pay by NEFT or IMPS</h2>
               <p className="mt-2 text-slate-600">
@@ -194,6 +198,44 @@ export default function PaymentPage() {
               </p>
             </div>
           )}
+
+          {method === 'cheque' && (
+            <div className="grid md:grid-cols-2 gap-8">
+              <div>
+                <h2 className="font-display text-2xl font-bold text-slate-900">Pay by cheque</h2>
+                <p className="mt-2 text-slate-600">
+                  Deposit the cheque at your own bank branch. The bank sends the money to our account.
+                </p>
+                <ol className="mt-5 space-y-4 text-slate-700">
+                  {[
+                    <>Write the cheque in the name of <span className="font-semibold text-slate-900">{BANK_DETAILS.accountName}</span> for your course fee.</>,
+                    <>Write your name and phone number on the back of the cheque.</>,
+                    <>At your bank, fill the deposit slip with the account details shown here and hand over the cheque.</>,
+                    <>Keep the <span className="font-semibold text-slate-900">counterfoil slip stamped by the bank</span> and take a clear photo of it.</>,
+                  ].map((text, i) => (
+                    <li key={i} className="flex gap-3">
+                      <span className="w-6 h-6 rounded-full bg-indigo-600 text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">
+                        {i + 1}
+                      </span>
+                      <span>{text}</span>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-slate-900">Details for the deposit slip</p>
+                <div className="mt-3 rounded-2xl bg-white border border-slate-200 px-4 sm:px-5">
+                  <DetailRow label="Pay to (cheque name)" value={BANK_DETAILS.accountName} />
+                  <DetailRow label="Account number" value={BANK_DETAILS.accountNumber} />
+                  <DetailRow label="IFSC code" value={BANK_DETAILS.ifsc} />
+                  <DetailRow label="Bank" value={BANK_DETAILS.bank} copy={false} />
+                </div>
+                <p className="mt-4 text-sm text-slate-500">
+                  Cheques usually take 1–3 working days to clear. Your seat is confirmed once the amount reaches our account.
+                </p>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* WhatsApp note */}
@@ -204,7 +246,7 @@ export default function PaymentPage() {
           <div className="flex-1">
             <h2 className="font-display text-lg font-bold text-slate-900">After paying, send us the screenshot</h2>
             <p className="mt-1 text-slate-700">
-              WhatsApp your payment screenshot with your name and course to{' '}
+              WhatsApp your payment screenshot (or a photo of the stamped cheque slip) with your name and course to{' '}
               <span className="font-semibold text-slate-900 whitespace-nowrap">+91 {WHATSAPP_NUMBER}</span>. We’ll confirm your enrollment.
             </p>
           </div>
