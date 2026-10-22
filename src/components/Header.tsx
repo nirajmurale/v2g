@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Menu, X, GraduationCap, ArrowRight } from 'lucide-react';
+import { Menu, X, GraduationCap } from 'lucide-react';
 import { NAV_ITEMS, type NavItem, type PageId } from '@/data/mockData';
 
 interface HeaderProps {
@@ -56,18 +56,6 @@ export default function Header({ activePage, onNavigate }: HeaderProps) {
             {NAV_ITEMS.map((item) => renderItem(item, false))}
           </nav>
 
-          {/* CTA */}
-          <div className="hidden lg:flex items-center gap-2 shrink-0">
-            <a
-              href="#payment"
-              onClick={() => setMobileOpen(false)}
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-500 transition-colors"
-            >
-              Enroll Now
-              <ArrowRight className="w-4 h-4" />
-            </a>
-          </div>
-
           {/* Mobile toggle */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
@@ -84,14 +72,6 @@ export default function Header({ activePage, onNavigate }: HeaderProps) {
         <div className="lg:hidden border-t border-slate-200 bg-white">
           <nav className="max-w-7xl mx-auto px-4 py-4 flex flex-col gap-1">
             {NAV_ITEMS.map((item) => renderItem(item, true))}
-            <a
-              href="#payment"
-              onClick={() => setMobileOpen(false)}
-              className="mt-2 flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-lg bg-indigo-600 text-white text-sm font-medium"
-            >
-              Enroll Now
-              <ArrowRight className="w-4 h-4" />
-            </a>
           </nav>
         </div>
       )}
