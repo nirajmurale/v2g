@@ -1,6 +1,6 @@
-import { Home, CreditCard, type LucideIcon } from 'lucide-react';
+import { Home, UserRound, CreditCard, type LucideIcon } from 'lucide-react';
 
-export type PageId = 'home' | 'payment';
+export type PageId = 'home' | 'about' | 'payment';
 
 export interface NavItem {
   id: PageId;
@@ -10,6 +10,7 @@ export interface NavItem {
 
 export const NAV_ITEMS: NavItem[] = [
   { id: 'home', label: 'Home', icon: Home },
+  { id: 'about', label: 'About', icon: UserRound },
   { id: 'payment', label: 'Payment', icon: CreditCard },
 ];
 

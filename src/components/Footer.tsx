@@ -40,6 +40,7 @@ export default function Footer({ onNavigate }: FooterProps) {
               <li><button onClick={() => goToSection('ai-course')} className={linkClass}>AI tools course</button></li>
               <li><button onClick={() => goToSection('computer-course')} className={linkClass}>Basic computer classes</button></li>
               <li><button onClick={() => goToSection('computer-course')} className={linkClass}>Excel, Word and PowerPoint</button></li>
+              <li><button onClick={() => onNavigate('about')} className={linkClass}>About the founder</button></li>
               <li><button onClick={() => onNavigate('payment')} className={linkClass}>Payment</button></li>
             </ul>
           </div>

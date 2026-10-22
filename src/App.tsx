@@ -3,10 +3,22 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import HomePage from '@/pages/HomePage';
 import PaymentPage from '@/pages/PaymentPage';
+import AboutPage from '@/pages/AboutPage';
 import type { PageId } from '@/data/mockData';
 
-// The payment page lives at #payment so Enroll links can point straight to it.
-const pageFromHash = (): PageId => (window.location.hash === '#payment' ? 'payment' : 'home');
+// Pages live at #about and #payment so links can point straight to them.
+const pageFromHash = (): PageId => {
+  const h = window.location.hash;
+  if (h === '#payment') return 'payment';
+  if (h === '#about') return 'about';
+  return 'home';
+};
+
+const TITLES: Record<PageId, string> = {
+  home: 'v2gaiacademy',
+  about: 'About Shilpa Pallavi — v2gaiacademy',
+  payment: 'Payment — v2gaiacademy',
+};
 
 function App() {
   const [activePage, setActivePage] = useState<PageId>(pageFromHash);
@@ -24,12 +36,12 @@ function App() {
   }, []);
 
   useEffect(() => {
-    document.title = activePage === 'payment' ? 'Payment — v2gaiacademy' : 'v2gaiacademy';
+    document.title = TITLES[activePage];
   }, [activePage]);
 
   const handleNavigate = (page: PageId) => {
-    if (page === 'payment') {
-      window.location.hash = 'payment';
+    if (page !== 'home') {
+      window.location.hash = page;
     } else {
       history.pushState(null, '', window.location.pathname);
       setActivePage('home');
@@ -42,7 +54,7 @@ function App() {
       <Header activePage={activePage} onNavigate={handleNavigate} />
 
       <main key={activePage} className="max-w-7xl mx-auto px-4 sm:px-6 pt-24 animate-fade-in">
-        {activePage === 'payment' ? <PaymentPage /> : <HomePage />}
+        {activePage === 'payment' ? <PaymentPage /> : activePage === 'about' ? <AboutPage /> : <HomePage />}
       </main>
 
       <Footer onNavigate={handleNavigate} />
