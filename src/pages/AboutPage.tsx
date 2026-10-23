@@ -12,7 +12,7 @@ import {
 
 const ROLES = ['Digital coach', 'Entrepreneur', 'Speaker', 'Founder'];
 
-const INITIATIVES = ['Digital Villages', 'Startup Utsav', 'Digital Connect', 'Digipreneur.AI', 'Telugu AI Bootcamp'];
+const INITIATIVES = ['Digital Villages', 'Startup Utsav', 'Digital Connect', 'Digipreneur.AI', 'Kannada AI Bootcamp'];
 
 const SKILLS_TAUGHT = ['Practical digital skills', 'AI tools', 'Automation', 'Branding', 'Freelancing', 'Business growth'];
 
@@ -97,7 +97,7 @@ export default function AboutPage() {
               <span
                 key={i}
                 className={`px-4 py-2 rounded-xl text-sm font-semibold ${
-                  i === 'Telugu AI Bootcamp' ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-800'
+                  i === 'Kannada AI Bootcamp' ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-800'
                 }`}
               >
                 {i}
@@ -116,12 +116,12 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Telugu AI Bootcamp */}
+      {/* Kannada AI Bootcamp */}
       <section className="mb-12 rounded-[2rem] bg-indigo-600 px-6 py-10 sm:px-12 sm:py-12">
         <div className="max-w-2xl">
-          <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-white">Telugu AI Bootcamp</h2>
+          <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-white">Kannada AI Bootcamp</h2>
           <p className="mt-3 text-lg text-indigo-100 leading-relaxed">
-            I started Telugu AI Bootcamp to make AI education simple, practical and accessible in Telugu. What began as a
+            I started Kannada AI Bootcamp to make AI education simple, practical and accessible in Kannada. What began as a
             training program has grown into a movement.
           </p>
         </div>
@@ -144,7 +144,7 @@ export default function AboutPage() {
           <h2 className="font-display text-xl font-bold text-slate-900">My mission</h2>
           <p className="mt-3 font-display text-6xl sm:text-7xl font-extrabold tracking-tight text-amber-600">100,000+</p>
           <p className="mt-3 text-lg text-slate-700 leading-relaxed">
-            Telugu people learning AI in Telugu, and using it practically for education, careers, creativity, business
+            Kannada people learning AI in Kannada, and using it practically for education, careers, creativity, business
             and everyday growth.
           </p>
         </div>
