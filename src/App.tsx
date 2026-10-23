@@ -16,7 +16,7 @@ const pageFromHash = (): PageId => {
 
 const TITLES: Record<PageId, string> = {
   home: 'v2gaiacademy',
-  about: 'About Shilpa Pallavi — v2gaiacademy',
+  about: 'About Shilpa — v2gaiacademy',
   payment: 'Payment — v2gaiacademy',
 };
 

@@ -41,7 +41,7 @@ export default function AboutPage() {
             <div aria-hidden="true" className="absolute -inset-2 sm:-inset-3 rounded-[2rem] bg-indigo-600 rotate-3" />
             <img
               src="/founder.jpg"
-              alt="Shilpa Pallavi, founder of v2gaiacademy"
+              alt="Shilpa, founder of v2gaiacademy"
               width={640}
               height={803}
               className="relative w-full h-auto rounded-[1.6rem] border-4 border-white object-cover"
@@ -52,7 +52,7 @@ export default function AboutPage() {
         <div>
           <p className="text-indigo-700 font-semibold">Meet the founder</p>
           <h1 className="mt-2 font-display text-[2.6rem] leading-[1.05] sm:text-6xl font-extrabold tracking-tight text-slate-900">
-            Shilpa Pallavi
+            Shilpa
           </h1>
           <ul className="mt-4 flex flex-wrap gap-2">
             {ROLES.map((r) => (
@@ -175,7 +175,7 @@ export default function AboutPage() {
           business that grows with digital skills, and every community that gets access to the opportunities of the AI
           era.
         </p>
-        <p className="mt-5 text-slate-600 font-medium">Shilpa Pallavi, Founder, v2gaiacademy</p>
+        <p className="mt-5 text-slate-600 font-medium">Shilpa, Founder, v2gaiacademy</p>
       </section>
     </div>
   );
