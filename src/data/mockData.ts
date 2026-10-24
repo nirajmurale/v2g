@@ -18,9 +18,13 @@ export const NAV_ITEMS: NavItem[] = [
 export const WHATSAPP_NUMBER = '9035324065';
 export const WHATSAPP_LINK = `https://wa.me/91${WHATSAPP_NUMBER}`;
 
+/** Course fee in rupees — shown on every payment option. */
+export const COURSE_FEE = 999;
+export const COURSE_FEE_LABEL = '₹999';
+
 export const UPI_ID = '0405pallavi@axl';
 export const UPI_NAME = 'PALLAVI B C';
-export const UPI_LINK = `upi://pay?pa=${UPI_ID}&pn=${encodeURIComponent(UPI_NAME)}&mc=0000&mode=02&purpose=00`;
+export const UPI_LINK = `upi://pay?pa=${UPI_ID}&pn=${encodeURIComponent(UPI_NAME)}&am=${COURSE_FEE}&cu=INR&mc=0000&mode=02&purpose=00`;
 
 export const BANK_DETAILS = {
   accountName: 'Pallavi BC',

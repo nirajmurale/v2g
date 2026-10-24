@@ -15,6 +15,7 @@ import {
   BANK_DETAILS,
   UPI_ID,
   UPI_LINK,
+  COURSE_FEE_LABEL,
   UPI_NAME,
   WHATSAPP_LINK,
   WHATSAPP_NUMBER,
@@ -90,6 +91,10 @@ export default function PaymentPage() {
         <p className="mt-4 text-lg text-slate-600">
           Pay by UPI, bank transfer or cheque. After paying, send us the screenshot on WhatsApp to confirm your seat.
         </p>
+        <div className="mt-6 inline-flex items-baseline gap-3 rounded-2xl bg-indigo-50 border border-indigo-100 px-6 py-3">
+          <span className="text-sm font-medium text-slate-600">Course fee</span>
+          <span className="font-display text-4xl font-extrabold text-indigo-700">{COURSE_FEE_LABEL}</span>
+        </div>
       </section>
 
       <div className="max-w-3xl mx-auto">
@@ -156,7 +161,7 @@ export default function PaymentPage() {
                   </li>
                   <li className="flex gap-3">
                     <span className="w-6 h-6 rounded-full bg-indigo-600 text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">2</span>
-                    Scan the QR code and enter your course fee.
+                    <span>Scan the QR code and enter <span className="font-semibold text-slate-900">{COURSE_FEE_LABEL}</span> as the amount.</span>
                   </li>
                   <li className="flex gap-3">
                     <span className="w-6 h-6 rounded-full bg-indigo-600 text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">3</span>
@@ -165,6 +170,7 @@ export default function PaymentPage() {
                 </ol>
 
                 <div className="mt-6 rounded-2xl bg-white border border-slate-200 px-4">
+                  <DetailRow label="Amount to pay" value={COURSE_FEE_LABEL} copy={false} />
                   <DetailRow label="UPI ID" value={UPI_ID} />
                   <DetailRow label="Name" value={UPI_NAME} copy={false} />
                 </div>
@@ -175,7 +181,7 @@ export default function PaymentPage() {
                   className="sm:hidden mt-4 flex items-center justify-center gap-2 w-full px-5 py-3.5 rounded-xl bg-indigo-600 text-white font-semibold"
                 >
                   <Smartphone className="w-4 h-4" />
-                  Open UPI app to pay
+                  Pay {COURSE_FEE_LABEL} with UPI app
                 </a>
               </div>
             </div>
@@ -185,9 +191,10 @@ export default function PaymentPage() {
             <div>
               <h2 className="font-display text-2xl font-bold text-slate-900">Pay by NEFT or IMPS</h2>
               <p className="mt-2 text-slate-600">
-                Add these details as a beneficiary in your bank app or net banking, then transfer your course fee.
+                Add these details as a beneficiary in your bank app or net banking, then transfer {COURSE_FEE_LABEL}.
               </p>
               <div className="mt-6 rounded-2xl bg-white border border-slate-200 px-4 sm:px-5">
+                <DetailRow label="Amount to transfer" value={COURSE_FEE_LABEL} copy={false} />
                 <DetailRow label="Account name" value={BANK_DETAILS.accountName} />
                 <DetailRow label="Account number" value={BANK_DETAILS.accountNumber} />
                 <DetailRow label="IFSC code" value={BANK_DETAILS.ifsc} />
@@ -208,7 +215,7 @@ export default function PaymentPage() {
                 </p>
                 <ol className="mt-5 space-y-4 text-slate-700">
                   {[
-                    <>Write the cheque in the name of <span className="font-semibold text-slate-900">{BANK_DETAILS.accountName}</span> for your course fee.</>,
+                    <>Write the cheque in the name of <span className="font-semibold text-slate-900">{BANK_DETAILS.accountName}</span> for <span className="font-semibold text-slate-900">{COURSE_FEE_LABEL}</span>.</>,
                     <>Write your name and phone number on the back of the cheque.</>,
                     <>At your bank, fill the deposit slip with the account details shown here and hand over the cheque.</>,
                     <>Keep the <span className="font-semibold text-slate-900">counterfoil slip stamped by the bank</span> and take a clear photo of it.</>,
@@ -225,6 +232,7 @@ export default function PaymentPage() {
               <div>
                 <p className="text-sm font-semibold text-slate-900">Details for the deposit slip</p>
                 <div className="mt-3 rounded-2xl bg-white border border-slate-200 px-4 sm:px-5">
+                  <DetailRow label="Cheque amount" value={COURSE_FEE_LABEL} copy={false} />
                   <DetailRow label="Pay to (cheque name)" value={BANK_DETAILS.accountName} />
                   <DetailRow label="Account number" value={BANK_DETAILS.accountNumber} />
                   <DetailRow label="IFSC code" value={BANK_DETAILS.ifsc} />
